@@ -1,0 +1,37 @@
+
+### Raiz da API
+GET http://localhost:5091
+
+
+# FUNCIONÁRIO ######################################
+
+### Criação de um novo funcionário
+POST http://localhost:5091/funcionario/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Gerundira da Silva",
+    "cpf" : "56700589045"
+}
+
+### Obtenção de todos os funcionários
+GET  http://localhost:5091/funcionario/listar
+# FOLHA ############################################
+
+### Criação de uma nova folha
+POST http://localhost:5091/folha/cadastrar/223f5e42-615b-4c46-9772-71ef8a739141
+Content-Type: application/json
+
+{
+    "valor": 50,
+    "quantidade" : 1000,
+    "mes" : 10,
+    "ano" : 2023,
+    "funcionarioId" : "223f5e42-615b-4c46-9772-71ef8a739141"
+}
+
+### Obtenção de todas as folhas
+GET  http://localhost:5091/folha/listar
+
+### Obtenção de uma folha
+//GET {{base_url}}/folha/buscar/12345678912/10/2023
