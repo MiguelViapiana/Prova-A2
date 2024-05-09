@@ -10,9 +10,6 @@ public class Folha
     public double Quantidade { get; set; }
     public int Mes { get; set; }
     public int Ano { get; set; }
-
-    public string FuncId { get; set; }
-
     public double salarioBruto { get; set; }
 
     public double impostoIrrf { get; set; }
@@ -23,9 +20,12 @@ public class Folha
 
     public double salarioLiquido { get; set; }
 
+    public String FuncId { get; set; }
+    public Funcionario? Funcionario { get; set; }
 
 
-    public Folha(double valor, double quantidade, int mes, int ano, string funcId)
+
+    public Folha(double valor, double quantidade, int mes, int ano, String funcId)
     {
         folhaId = Guid.NewGuid().ToString();
         Valor = valor;
@@ -82,11 +82,5 @@ public class Folha
         salarioLiquido = (salarioBruto - impostoFgts) - (impostoInss + impostoIrrf);
     }
 }
-public class FolhaRequest
-{
-    public double Valor { get; set; }
-    public double Quantidade { get; set; }
-    public int Mes { get; set; }
-    public int Ano { get; set; }
-}
+
 

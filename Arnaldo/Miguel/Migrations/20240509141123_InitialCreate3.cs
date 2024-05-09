@@ -5,7 +5,7 @@
 namespace Miguel.Migrations
 {
     /// <inheritdoc />
-    public partial class CriacaoDaFolhaComFuncionario : Migration
+    public partial class InitialCreate3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,8 @@ namespace Miguel.Migrations
                 name: "FuncId",
                 table: "Folhas",
                 type: "TEXT",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />

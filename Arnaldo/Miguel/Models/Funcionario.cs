@@ -4,7 +4,6 @@ namespace Arnaldo.Miguel.Models;
 
 public class Funcionario
 {
-    internal static readonly object ForeignKey;
 
     public Funcionario(String nome, string cpf){
         this.Nome = nome;
@@ -14,6 +13,7 @@ public class Funcionario
     public string? funcionarioId { get; set; }
     public string? Nome { get; set; }
     public string Cpf { get; set; }
+
 
 
 }

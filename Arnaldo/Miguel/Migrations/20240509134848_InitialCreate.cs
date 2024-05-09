@@ -5,11 +5,24 @@
 namespace Miguel.Migrations
 {
     /// <inheritdoc />
-    public partial class CriacaoDaFolha : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Funcionarios",
+                columns: table => new
+                {
+                    funcionarioId = table.Column<string>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    Cpf = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Funcionarios", x => x.funcionarioId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Folhas",
                 columns: table => new
@@ -23,12 +36,23 @@ namespace Miguel.Migrations
                     impostoIrrf = table.Column<double>(type: "REAL", nullable: false),
                     impostoInss = table.Column<double>(type: "REAL", nullable: false),
                     impostoFgts = table.Column<double>(type: "REAL", nullable: false),
-                    salarioLiquido = table.Column<double>(type: "REAL", nullable: false)
+                    salarioLiquido = table.Column<double>(type: "REAL", nullable: false),
+                    funcionarioId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Folhas", x => x.folhaId);
+                    table.ForeignKey(
+                        name: "FK_Folhas_Funcionarios_funcionarioId",
+                        column: x => x.funcionarioId,
+                        principalTable: "Funcionarios",
+                        principalColumn: "funcionarioId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Folhas_funcionarioId",
+                table: "Folhas",
+                column: "funcionarioId");
         }
 
         /// <inheritdoc />
@@ -36,6 +60,9 @@ namespace Miguel.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Folhas");
+
+            migrationBuilder.DropTable(
+                name: "Funcionarios");
         }
     }
 }

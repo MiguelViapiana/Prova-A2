@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Miguel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240502141807_Criacao5")]
-    partial class Criacao5
+    [Migration("20240509134848_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,10 +26,6 @@ namespace Miguel.Migrations
                     b.Property<int>("Ano")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("FuncId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Mes")
                         .HasColumnType("INTEGER");
 
@@ -38,6 +34,9 @@ namespace Miguel.Migrations
 
                     b.Property<double>("Valor")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("funcionarioId")
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("impostoFgts")
                         .HasColumnType("REAL");
@@ -55,6 +54,8 @@ namespace Miguel.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("folhaId");
+
+                    b.HasIndex("funcionarioId");
 
                     b.ToTable("Folhas");
                 });
@@ -74,6 +75,15 @@ namespace Miguel.Migrations
                     b.HasKey("funcionarioId");
 
                     b.ToTable("Funcionarios");
+                });
+
+            modelBuilder.Entity("Arnaldo.Miguel.Models.Folha", b =>
+                {
+                    b.HasOne("Arnaldo.Miguel.Models.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("funcionarioId");
+
+                    b.Navigation("Funcionario");
                 });
 #pragma warning restore 612, 618
         }

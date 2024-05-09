@@ -36,6 +36,9 @@ namespace Miguel.Migrations
                     b.Property<double>("Valor")
                         .HasColumnType("REAL");
 
+                    b.Property<string>("funcionarioId")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("impostoFgts")
                         .HasColumnType("REAL");
 
@@ -52,6 +55,8 @@ namespace Miguel.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("folhaId");
+
+                    b.HasIndex("funcionarioId");
 
                     b.ToTable("Folhas");
                 });
@@ -71,6 +76,15 @@ namespace Miguel.Migrations
                     b.HasKey("funcionarioId");
 
                     b.ToTable("Funcionarios");
+                });
+
+            modelBuilder.Entity("Arnaldo.Miguel.Models.Folha", b =>
+                {
+                    b.HasOne("Arnaldo.Miguel.Models.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("funcionarioId");
+
+                    b.Navigation("Funcionario");
                 });
 #pragma warning restore 612, 618
         }

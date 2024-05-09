@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Miguel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240502140333_Criacao2")]
-    partial class Criacao2
+    [Migration("20240509141123_InitialCreate3")]
+    partial class InitialCreate3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,7 @@ namespace Miguel.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FuncId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Mes")
@@ -82,16 +83,11 @@ namespace Miguel.Migrations
 
             modelBuilder.Entity("Arnaldo.Miguel.Models.Folha", b =>
                 {
-                    b.HasOne("Arnaldo.Miguel.Models.Funcionario", "funcionario")
-                        .WithMany("Folhas")
+                    b.HasOne("Arnaldo.Miguel.Models.Funcionario", "Funcionario")
+                        .WithMany()
                         .HasForeignKey("funcionarioId");
 
-                    b.Navigation("funcionario");
-                });
-
-            modelBuilder.Entity("Arnaldo.Miguel.Models.Funcionario", b =>
-                {
-                    b.Navigation("Folhas");
+                    b.Navigation("Funcionario");
                 });
 #pragma warning restore 612, 618
         }
